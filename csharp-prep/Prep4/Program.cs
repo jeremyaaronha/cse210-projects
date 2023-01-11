@@ -1,4 +1,4 @@
-using System
+using System;
 using System.Collections.Generic;
 
 class Program
@@ -30,10 +30,10 @@ class Program
 
         countNumbers = Console.WriteLine(numbers.count);
         float average = (sum/countNumbers);
-        Console.WriteLine($"Average: {average}")
+        Console.WriteLine($"Average: {average}");
 
         int largestNumber = numbers.Max();
-        Console.WriteLine($"The largest number is: {largestNumber}")
+        Console.WriteLine($"The largest number is: {largestNumber}");
         
         Console.WriteLine(numbers.Sort());
 
