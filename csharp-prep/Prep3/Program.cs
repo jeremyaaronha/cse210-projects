@@ -4,15 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        Random randomGenerator = new.Random();
+        Random randomGenerator = new Random();
         int magicNumber = randomGenerator.Next(1,101);
 
         Console.WriteLine("");
-
+        
         do
         {
             Console.Write("What is your guess?: ");
-            int userGuess = Console.ReadLine();
+            string guess = Console.ReadLine();
+            int userGuess = int.Parse(guess);
+
 
             if (userGuess > magicNumber)
             {
@@ -26,7 +28,7 @@ class Program
             {
                 Console.WriteLine("You guess it!");
             }
-        } while (userGuess != magicNumber);
+        } while ( userGuess != magicNumber);
 
 
     }

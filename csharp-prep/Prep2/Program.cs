@@ -36,11 +36,11 @@ class Program
 
         if (userPercentageInt >= 70)
         {
-            Console.WriteLine("You pass!")
+            Console.WriteLine("You pass!");
         }
         else
         {
-            Console.WriteLine("You don't pass, you can do it better next time!")
+            Console.WriteLine("You don't pass, you can do it better next time!");
         }
 
 
