@@ -1,5 +1,7 @@
 using System;
-using System.IO; 
+using System.IO;
+using System.Collections.Generic;
+
 
 
 class Program
@@ -10,6 +12,8 @@ class Program
         Console.WriteLine();
 
         Console.WriteLine("Welcome to the Journal Program!");
+
+        List<string> JournalList = new List<string>();
 
         while (_userChoice != "5")
         {
@@ -25,6 +29,7 @@ class Program
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
+            Console.WriteLine("6. Delete");
 
             Console.WriteLine();
 
@@ -33,23 +38,28 @@ class Program
 
             if (_userChoice == "1")
             {
-                Entry CreateEntry();
+                new Entry().CreateEntry(JournalList);
             }
             else if (_userChoice == "2")
             {
-                Entry DisplayEntry();
+                new Entry().DisplayEntry(JournalList);
             }
             else if (_userChoice == "3")
             {
-                Journal LoadFile();
+                new Journal().LoadFile(JournalList);
             }
             else if (_userChoice == "4")
             {
-                Journal SaveFile();
+                new Journal().SaveFile(JournalList);
             }
             else if (_userChoice == "5")
             {
                 break;
+            }
+            else if (_userChoice == "6")
+            {
+                new Entry().DeleteEntry(JournalList);
+                
             }
         }
     }
@@ -57,47 +67,61 @@ class Program
 
 public class Entry
 {
-    public CreateEntry(string[] args)
+    public void CreateEntry(List<string> JournalList)
     {
-        public List<string> JournalList = new List<string>();
-        public string _prompt;
-        public string _userResponse;
-        public DateTime _today;
 
-        PromptGenerator RandomPrompt = Prompt();
-        _prompt = Prompt();
+        string _prompt;
+        string _userResponse;
+        DateTime _today;
+
+        _prompt = new PromptGenerator().Prompt();
         Console.WriteLine(_prompt);
         _userResponse = Console.ReadLine();
         _today = DateTime.Today;
         JournalList.Add($"Date: {_today} - Prompt: {_prompt} - {_userResponse}");
     }
 
-    public  DisplayEntry(string args)
+    public void DisplayEntry(List<string> JournalList)
     {
-        public string _response;
+        string _response;
         
-        foreach (_response in JournalList)
+        foreach (string _entry in JournalList)
         {
-            Console.WriteLine(_response);
+            Console.WriteLine(_entry);
         }
+    }
+    public void DeleteEntry(List<string> JournalList)
+    {
+        if (JournalList.Count == 0)
+        {
+            Console.WriteLine("No entries to delete.");
+            return;
+        }
+
+        Console.WriteLine("Please choose the entry that you want to delete? (Enter the number of the entry)");
+        DisplayEntry(JournalList);
+        int entryToDelete = int.Parse(Console.ReadLine());
+        JournalList.RemoveAt(entryToDelete - 1);
+        Console.WriteLine("Entry deleted.");
     }
 }
 
 
 public class Journal
 {
-    public LoadFile(string[] args)
+    public void LoadFile(List<string> JournalList)
     {
-        public string path;
+        string _path;
+        Console.WriteLine("Please enter the file name: ");
+        _path = Console.ReadLine();
+        //_path = "myJournal.txt";
 
-        path = "myJournal.txt";
-
-        if (File.Exists(path))
+        if (File.Exists(_path))
         {
-            string[] lines = File.ReadAllLines(path);
-            foreach (string line in lines)
+            string[] lines = File.ReadAllLines(_path);
+            foreach (string _response in lines)
             {
-                Console.WriteLine(line);
+                Console.WriteLine(_response);
             }
         }
         else
@@ -106,24 +130,28 @@ public class Journal
         }
     }
     
-    public SaveFile(string[] args)
+    public void SaveFile(List<string> JournalList)
     {   
-        public string fileName;
+        string _fileName;
 
-        fileName = "myJournal.txt";
+        Console.WriteLine("Please enter the file name: ");
+        _fileName = Console.ReadLine();
 
-        using (StreamWriter outputFile = new StreamWriter(fileName))
+        using (StreamWriter outputFile = new StreamWriter(_fileName))
         {
-            outputFile.WriteLine(JournalList);
+            foreach(string _entry in JournalList)
+            {
+                outputFile.WriteLine(_entry);
+            }
+            outputFile.Close();
         }
     }
 }
 
 public class PromptGenerator
 {
-    public RandomPrompt(string[] args)
+    public string Prompt()
     {
-        
         string[] _promptsList = {
             "What was the most interesting thing that happened to me today?",
             "What was my favorite moment today?",
@@ -140,7 +168,7 @@ public class PromptGenerator
         Random _random = new Random();
         int index = _random.Next(_promptsList.Length);
         string _randomPrompt = _promptsList[index];
-        Console.WriteLine($"{_randomPrompt}");
+        return _randomPrompt;
 
     }
 

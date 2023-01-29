@@ -140,7 +140,7 @@
             "preLaunchTask": "build-prove-Develop02",
             "program": "${workspaceFolder}/prove/Develop02/bin/Debug/net7.0/Develop02.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/prove/Develop02",
+            "cwd": "${workspaceFolder}/prove/Develop02/Program.cs",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "stopAtEntry": false
