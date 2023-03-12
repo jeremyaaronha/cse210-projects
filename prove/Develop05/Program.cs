@@ -13,8 +13,6 @@ class Program
 
         do
         {
-
-
             Console.WriteLine();
             Console.WriteLine("Menu:");
             Console.WriteLine();
