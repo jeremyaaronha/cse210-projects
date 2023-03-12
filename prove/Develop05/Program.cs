@@ -279,7 +279,7 @@ public class Goal
     }
 }
 
-class SimpleGoal : Goal
+public class SimpleGoal : Goal
 {
     public SimpleGoal(string name, string description, int points, bool completed)
         : base(name, description, points, completed)
@@ -318,7 +318,7 @@ class SimpleGoal : Goal
     }
 }
 
-class EternalGoal : Goal
+public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, int points)
         : base(name, description, points, false)
@@ -347,7 +347,7 @@ class EternalGoal : Goal
     }
 }
 
-class ChecklistGoal : Goal
+public class ChecklistGoal : Goal
 {
     private int _timesCompleted;
     private int _timesToComplete;
